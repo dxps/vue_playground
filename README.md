@@ -1,2 +1,4 @@
-# vue_playground
-Vue.js Playground
+# Vue.JS Playground
+
+This is a playground for various Vue.js based projects and experiments.
+
