@@ -1,24 +1,26 @@
-# real-world-vue
+# Real World Vue
 
-## Project setup
-```
-npm install
-```
+This project is based on VueMastery's [Real World Vue](https://www.vuemastery.com/courses/real-world-vue-js) course.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Setup
 
-### Lints and fixes files
-```
-npm run lint
-```
+Run `npm install` to install the dependencies.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Dev Run
+
+Use `npm run serve` to compile and have hot-reloads during development.
+
+
+### Build
+
+Use `npm run build` to compile and have a minified build for production.
+
+Use `npm run lint` for linting and fixing files.
+
+
+### Config Customization
+
+See [Configuration Reference](https://cli.vuejs.org/config/) for config customization options.
+
