@@ -1,5 +1,9 @@
 <template>
-  
+
+  <my-input 
+    name="Username"
+  />
+
   <my-button 
     color="white"
     background="darkslateblue"
@@ -13,9 +17,12 @@
 <script>
 
 import MyButton from './comps/MyButton.vue'
+import MyInput from './comps/MyInput.vue'
 
 export default {
-    components: { MyButton },
+    components: { 
+      MyButton, 
+      MyInput },
     data() {
       return {
         valid: false
@@ -28,6 +35,10 @@ export default {
 
 
 
-<style scoped>
+<style>
+
+body {
+  font-family: Arial;
+}
 
 </style>

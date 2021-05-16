@@ -1,12 +1,17 @@
 <template>
+
   <button
     :style="{ background, color }" 
     :class="{ 'disabled-button': disabled }">
       Button
   </button>
+
 </template>
 
+
+
 <script>
+
 export default {
   props: {
     background: {
@@ -20,7 +25,10 @@ export default {
     }
   }
 }
+
 </script>
+
+
 
 <style scoped>
 
@@ -33,10 +41,12 @@ button {
   color: black;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
   font-size: 16px;
   padding: 10px 40px;
-  cursor: pointer;
+
 }
+
 button:hover {
   filter: brightness(125%)
 }
