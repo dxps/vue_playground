@@ -2,6 +2,12 @@
 
   <my-input 
     name="Username"
+    :rules="{ required: true, min: 5 }"
+  />
+
+  <my-input 
+    name="Password"
+    :rules="{ required: true, min: 8 }"
   />
 
   <my-button 
