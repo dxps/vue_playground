@@ -7,8 +7,9 @@
         </div>
         <input 
             :id="name"
-            type="text"
-            v-model="value"
+            :type="type"
+            :value="value"
+            @input="input"
         />
     </div>
   
@@ -23,19 +24,32 @@ export default {
         },
         rules: {
             type: Object // includes: min, required
-        }
-    },
-    data() {
-        return {
-            value: ''
+        },
+        type: {
+            type: String
+        },
+        value: {
+            type: String
         }
     },
     computed: {
         error() {
-            if (this.rules.required && !this.value) {
+            return this.validate(this.value)
+        }
+    },
+    methods: {
+        input($evt) {
+            this.$emit('update', {
+                name: this.name,
+                value: $evt.target.value,
+                valid: this.validate($evt.target.value) ? false : true
+            })
+        },
+        validate(value) {
+            if (this.rules.required && !value) {
                 return 'Required'
             }
-            if (this.rules.min && this.value.length < this.rules.min) {
+            if (this.rules.min && value.length < this.rules.min) {
                 return `Minimum length is ${this.rules.min}`
             }
         }
