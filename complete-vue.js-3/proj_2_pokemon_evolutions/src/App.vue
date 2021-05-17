@@ -1,22 +1,36 @@
 <template>
-    <div class="card">
-        <button @click="fetchData">Fetch</button>
-        <div class="title">title</div>
-        <div class="content">content</div>
-        <div class="description">desc</div>
+    <div class="cards">
+        <card v-for="starter in starters">
+            <template v-slot:title>
+                {{ starter.name }}
+            </template>
+
+            <template v-slot:content>
+                <img :src="starter.sprite" />
+            </template>
+
+            <template v-slot:description>
+                <div v-for="type in starter.types">{{ type }}</div>
+            </template>
+        </card>
     </div>
 </template>
 
 
 
 <script>
+import Card from "./comps/Card.vue";
+
 const api = "https://pokeapi.co/api/v2/pokemon";
 const ids = [1, 4, 7];
 
 export default {
+    components: {
+        Card,
+    },
     data() {
         return {
-            pokemon: [],
+            starters: [],
         };
     },
     methods: {
@@ -25,50 +39,30 @@ export default {
                 ids.map((id) => window.fetch(`${api}/${id}`))
             );
             const data = await Promise.all(responses.map((res) => res.json()));
-            const pokemon = data.map((datum) => ({
+            this.starters = data.map((datum) => ({
                 id: datum.id,
                 name: datum.name,
                 sprite: datum.sprites.other["official-artwork"].front_default,
                 types: datum.types.map((type) => type.type.name),
             }));
-            console.log(pokemon);
         },
     },
+    // Lifecycle Hooks
+    created() {
+        this.fetchData();
+    },
+    // mounted() {},
 };
 </script>
 
 
 
 <style scoped>
-.card {
-    border: 1px solid silver;
-    border-radius: 8px;
-    max-width: 200px;
-    margin: 0 5px;
-    cursor: pointer;
-    box-shadow: 0px 1px 3px darkgrey;
-    transition: 0.2s;
+.cards {
+    display: flex;
 }
 
-.title,
-.content,
-.description {
-    padding: 16px;
-    text-transform: capitalize;
-    text-align: center;
-}
-
-.title,
-.content {
-    border-bottom: 1px solid silver;
-}
-
-.title {
-    font-size: 1.25em;
-}
-
-.card:hover {
-    transition: 0.2s;
-    box-shadow: 0px 1px 9px darkgrey;
+img {
+    width: 100%;
 }
 </style>
