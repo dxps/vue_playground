@@ -1,41 +1,17 @@
 <template>
-    <div class="cards">
-        <card v-for="starter in starters" @click="fetchEvolutions(starter)">
-            <template v-slot:title>
-                {{ starter.name }}
-            </template>
-
-            <template v-slot:content>
-                <img :src="starter.sprite" />
-            </template>
-
-            <template v-slot:description>
-                <div v-for="type in starter.types">{{ type }}</div>
-            </template>
-        </card>
-    </div>
-
-    <div class="cards">
-        <card v-for="creature in evolutions">
-            <template v-slot:title>
-                {{ creature.name }}
-            </template>
-
-            <template v-slot:content>
-                <img :src="creature.sprite" />
-            </template>
-
-            <template v-slot:description>
-                <div v-for="type in creature.types">{{ type }}</div>
-            </template>
-        </card>
-    </div>
+    <pokemon-cards
+        :pokemons="starters"
+        :selectedId="selectedId"
+        @pokemonClicked="fetchEvolutions"
+    />
+    <pokemon-cards :pokemons="evolutions" />
 </template>
 
 
 
 <script>
 import Card from "./comps/Card.vue";
+import PokemonCards from "./comps/PokemonCards.vue";
 
 const API = "https://pokeapi.co/api/v2/pokemon";
 const STARTER_IDS = [1, 4, 7];
@@ -43,11 +19,13 @@ const STARTER_IDS = [1, 4, 7];
 export default {
     components: {
         Card,
+        PokemonCards,
     },
     data() {
         return {
             starters: [],
             evolutions: [],
+            selectedId: null,
         };
     },
     methods: {
@@ -64,6 +42,7 @@ export default {
             }));
         },
         async fetchEvolutions(pokemon) {
+            this.selectedId = pokemon.id;
             this.evolutions = await this.fetchData([
                 pokemon.id + 1,
                 pokemon.id + 2,
@@ -81,11 +60,4 @@ export default {
 
 
 <style scoped>
-.cards {
-    display: flex;
-}
-
-img {
-    width: 100%;
-}
 </style>
