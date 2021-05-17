@@ -24,16 +24,14 @@ export default {
             const responses = await Promise.all(
                 ids.map((id) => window.fetch(`${api}/${id}`))
             );
-            const json = await Promise.all(
-                responses.map((data) => data.json())
-            );
-            this.pokemon = json.map((datum) => ({
+            const data = await Promise.all(responses.map((res) => res.json()));
+            const pokemon = data.map((datum) => ({
                 id: datum.id,
                 name: datum.name,
                 sprite: datum.sprites.other["official-artwork"].front_default,
                 types: datum.types.map((type) => type.type.name),
             }));
-            console.log(this.pokemon);
+            console.log(pokemon);
         },
     },
 };
