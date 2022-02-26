@@ -1,24 +1,17 @@
 # v3mc-forum
 
-## Project setup
-```
-yarn install
-```
+A forum sample app.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+<br/>
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Setup & Usage
 
-### Lints and fixes files
-```
-yarn lint
-```
+Run: 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- `pnpm i` to install the dependencies
+- `pnpm run serve` for compiling and hot reloading during development.
+- `pnpm run build` for doing (incl minification) the production build.
+- `pnpm run list --fix` for linting and fixes (according to `.eslintrc.js`)<br/>
+  To use the same 4 spaces indentation, added also the VSCode setting `"editor.detectIndentation": false`
+  
+<br/>
