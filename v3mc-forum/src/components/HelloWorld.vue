@@ -99,16 +99,28 @@
                 >
             </li>
         </ul>
+        <div>
+            {{ srcData.threads }}
+        </div>
     </div>
 </template>
 
 <script>
+import srcData from "@/data.json";
+
+console.log("srcData:", srcData);
+
 export default {
-    name: 'HelloWorld',
+    name: "HelloWorld",
     props: {
-        msg: String
-    }
-}
+        msg: String,
+    },
+    data() {
+        return {
+            srcData: srcData,
+        };
+    },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
