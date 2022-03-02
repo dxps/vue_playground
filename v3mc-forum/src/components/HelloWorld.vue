@@ -106,9 +106,9 @@
 </template>
 
 <script>
-import srcData from "@/data.json";
+import srcData from "@/data.json"
 
-console.log("srcData:", srcData);
+console.log("srcData:", srcData)
 
 export default {
     name: "HelloWorld",

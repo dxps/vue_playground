@@ -1,4 +1,5 @@
 <template>
+
     <div>PageHome</div>
 
     <div v-for="thread in threads" :key="thread.id">
@@ -10,28 +11,31 @@
             <p>{{ postById(postId).text }}</p>
         </div>
     </div>
+
 </template>
 
 <script>
-import srcData from "@/data.json";
+
+import srcData from "@/data.json"
 
 export default {
     data() {
         return {
             threads: srcData.threads,
             posts: srcData.posts,
-            users: srcData.users,
-        };
+            users: srcData.users
+        }
     },
     methods: {
         postById(postId) {
-            return this.posts.find((p) => p.id === postId);
+            return this.posts.find((p) => p.id === postId)
         },
         userById(userId) {
-            return this.users.find((u) => u.id === userId);
-        },
-    },
-};
+            return this.users.find((u) => u.id === userId)
+        }
+    }
+}
+
 </script>
 
 <style scoped>

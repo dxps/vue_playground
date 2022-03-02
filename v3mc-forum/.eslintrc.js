@@ -17,10 +17,16 @@ module.exports = {
 
     rules: {
         // Add four spaces.
-        indent: ['error', 4],
+        'indent': ['error', 4],
         'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
         'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-        'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'quotes': [2, "double", { "avoidEscape": true }],
+        'space-before-function-paren': ['error', {
+            anonymous: 'always',
+            named: 'never',
+            asyncArrow: 'always'
+        }]
     }
 
 }

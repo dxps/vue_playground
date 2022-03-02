@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import PageHome from "./components/PageHome.vue";
+import PageHome from "./components/PageHome.vue"
 
 export default {
     name: "App",
     components: {
-        PageHome,
-    },
-};
+        PageHome
+    }
+}
 </script>
 
 <style>
