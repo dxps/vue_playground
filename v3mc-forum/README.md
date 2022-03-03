@@ -1,6 +1,22 @@
 # v3mc-forum
 
-A forum sample app.
+A forum app.
+
+<br/>
+
+## VSCode Notes
+
+Using these extensions:
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+
+And have these related settings:
+```json
+"[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+},
+"vetur.format.defaultFormatter.js": "prettier",
+```
 
 <br/>
 
