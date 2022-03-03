@@ -9,11 +9,7 @@
                         {{ userById(postById(postId).userId).name }}
                     </a>
                     <a href="#">
-                        <img
-                            class="avatar-large"
-                            :src="userById(postById(postId).userId).avatar"
-                            alt=""
-                        />
+                        <img class="avatar-large" :src="userById(postById(postId).userId).avatar" alt="" />
                     </a>
                     <p class="desktop-only text-small">107 posts</p>
                 </div>
@@ -33,7 +29,6 @@
 </template>
 
 <script>
-
 import srcData from "@/data.json"
 
 export default {
@@ -49,7 +44,7 @@ export default {
     },
     computed: {
         thread() {
-            return this.threads.find(thread => thread.id === this.id)
+            return this.threads.find((thread) => thread.id === this.id)
         }
     },
     methods: {
@@ -61,7 +56,6 @@ export default {
         }
     }
 }
-
 </script>
 
 <style scoped>
