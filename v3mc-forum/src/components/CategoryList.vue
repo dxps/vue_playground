@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import srcDate from "@/data.json"
 import ForumList from "./ForumList.vue"
 
 export default {
@@ -19,7 +18,7 @@ export default {
     },
     methods: {
         getForumsForCategory(category) {
-            return srcDate.forums.filter((forum) => forum.categoryId === category.id)
+            return this.$store.state.forums.filter((forum) => forum.categoryId === category.id)
         }
     }
 }

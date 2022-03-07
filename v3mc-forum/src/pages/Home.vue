@@ -1,16 +1,15 @@
 <template>
-    <h1>Welcome to the Forum</h1>
+    <h1 class="push-top">Welcome to the Forum</h1>
     <category-list :categories="categories" />
 </template>
 
 <script>
-import srcData from "@/data.json"
 import CategoryList from "@/components/CategoryList.vue"
 
 export default {
-    data() {
-        return {
-            categories: srcData.categories
+    computed: {
+        categories() {
+            return this.$store.state.categories
         }
     },
     components: { CategoryList }

@@ -4,7 +4,7 @@ import ThreadShow from "@/pages/ThreadShow"
 import Category from "@/pages/Category"
 import Forum from "@/pages/Forum"
 import NotFound from "@/pages/NotFound"
-import srcData from "@/data.json"
+import store from "@/store"
 
 const routes = [
     { path: "/", name: "Home", component: Home },
@@ -14,7 +14,7 @@ const routes = [
         component: ThreadShow,
         props: true,
         beforeEnter(to, from, next) {
-            const threadExists = srcData.threads.find(thread => thread.id === to.params.id)
+            const threadExists = store.state.threads.find(thread => thread.id === to.params.id)
             if (threadExists) {
                 return next()
             } else {

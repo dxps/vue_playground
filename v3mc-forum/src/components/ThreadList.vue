@@ -31,16 +31,14 @@
 </template>
 
 <script>
-import srcData from "@/data.json"
-
 export default {
     props: {
         threads: { type: Array, required: true }
     },
     data() {
         return {
-            posts: srcData.posts,
-            users: srcData.users
+            posts: this.$store.state.posts,
+            users: this.$store.state.users
         }
     },
     methods: {
