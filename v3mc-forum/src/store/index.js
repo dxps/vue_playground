@@ -2,7 +2,13 @@ import srcData from "@/data.json"
 import { createStore } from "vuex"
 
 export default createStore({
-    state: srcData,
+    state: {
+        ...srcData,
+        authId: "ALXhxjwgY9PinwNGHpfai6OWyDu2"
+    },
+    getters: {
+        authUser: state => state.users.find(user => user.id === state.authId)
+    },
     actions: {
         createPost(context, post) {
             post.id = "temp-dev-" + Math.random()

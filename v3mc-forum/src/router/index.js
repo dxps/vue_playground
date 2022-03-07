@@ -3,6 +3,7 @@ import Home from "@/pages/Home"
 import ThreadShow from "@/pages/ThreadShow"
 import Category from "@/pages/Category"
 import Forum from "@/pages/Forum"
+import Profile from "@/pages/Profile"
 import NotFound from "@/pages/NotFound"
 import store from "@/store"
 
@@ -42,6 +43,11 @@ const routes = [
         props: true, // To set the route (path) param as a component prop.
         name: "Forum",
         component: Forum
+    },
+    {
+        path: "/me",
+        name: "Profile",
+        component: Profile
     },
     // This matches everything and put it under `$route.params.pathMatch`.
     { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound }
