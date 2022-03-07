@@ -1,15 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router"
-import PageHome from "@/pages/Home"
-import PageThreadShow from "@/pages/ThreadShow"
-import PageNotFound from "@/pages/NotFound"
+import Home from "@/pages/Home"
+import ThreadShow from "@/pages/ThreadShow"
+import Category from "@/pages/Category"
+import Forum from "@/pages/Forum"
+import NotFound from "@/pages/NotFound"
 import srcData from "@/data.json"
 
 const routes = [
-    { path: "/", name: "Home", component: PageHome },
+    { path: "/", name: "Home", component: Home },
     {
         path: "/thread/:id",
         name: "ThreadShow",
-        component: PageThreadShow,
+        component: ThreadShow,
         props: true,
         beforeEnter(to, from, next) {
             const threadExists = srcData.threads.find(thread => thread.id === to.params.id)
@@ -29,8 +31,20 @@ const routes = [
             }
         }
     },
-    // will match everything and put it under `$route.params.pathMatch`
-    { path: "/:pathMatch(.*)*", name: "NotFound", component: PageNotFound }
+    {
+        path: "/category/:id",
+        props: true,
+        name: "Category",
+        component: Category
+    },
+    {
+        path: "/forum/:id",
+        props: true, // To set the route (path) param as a component prop.
+        name: "Forum",
+        component: Forum
+    },
+    // This matches everything and put it under `$route.params.pathMatch`.
+    { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound }
 ]
 
 export default createRouter({
