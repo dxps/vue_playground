@@ -27,6 +27,15 @@ module.exports = {
             named: 'never',
             asyncArrow: 'always'
         }]
-    }
+    },
+
+    overrides: [
+        {
+            files: ['src/pages/**/*.vue'],
+            rules: {
+                'vue/multi-word-component-names': 0
+            }
+        }
+    ]
 
 }

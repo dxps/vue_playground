@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
-import PageHome from "@/components/PageHome"
-import PageThreadShow from "@/components/PageThreadShow"
-import PageNotFound from "@/components/PageNotFound"
+import PageHome from "@/pages/Home"
+import PageThreadShow from "@/pages/ThreadShow"
+import PageNotFound from "@/pages/NotFound"
 import srcData from "@/data.json"
 
 const routes = [
@@ -16,6 +16,10 @@ const routes = [
             if (threadExists) {
                 return next()
             } else {
+                // Show the Not Found, but keep the initial URL.
+                // It uses the pathMatch parameter for the route object passed to next().
+                // substring(1) removes the first character from the string.
+                // Provided query and hash are for preserving any query param and/or hash.
                 next({
                     name: "NotFound",
                     params: { pathMatch: to.path.substring(1).split("/") },
