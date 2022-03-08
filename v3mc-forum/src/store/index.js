@@ -28,10 +28,12 @@ export default createStore({
         }
     },
     actions: {
-        createPost(context, post) {
+        createPost({ commit, state }, post) {
             post.id = "temp-dev-" + Math.random()
-            context.commit("addPost", { post })
-            context.commit("addPostRefToThread", { postId: post.id, threadId: post.threadId })
+            post.userId = state.authId
+            post.publishedAt = Math.floor(Date.now() / 1000)
+            commit("addPost", { post })
+            commit("addPostRefToThread", { postId: post.id, threadId: post.threadId })
         },
         updateUserProfile({ commit }, user) {
             commit("setUserProfile", { user, userId: user.id })
