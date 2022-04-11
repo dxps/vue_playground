@@ -8,6 +8,7 @@ const cartStore = useCartStore()
 // data
 const active = ref(false)
 </script>
+
 <template>
 	<div class="relative">
 		<!-- Icon that always shows -->
@@ -34,13 +35,14 @@ const active = ref(false)
 				</div>
 				<div class="flex justify-end">
 					<AppButton class="secondary mr-2" @click="cartStore.$reset()">Clear Cart</AppButton>
-					<AppButton class="primary">Checkout</AppButton>
+					<AppButton class="primary" @click="cartStore.checkout">Checkout</AppButton>
 				</div>
 			</div>
 			<div v-else><em>Cart is Empty</em></div>
 		</AppModalOverlay>
 	</div>
 </template>
+
 <style lang="pcss" scoped>
 .items-in-cart{
   @apply mb-5;
