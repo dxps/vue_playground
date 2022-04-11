@@ -3,9 +3,8 @@ import TheHeader from "@/components/TheHeader.vue"
 import ProductCard from "@/components/ProductCard.vue"
 import { useProductStore } from "./stores/ProductStore"
 
-// Destructuring, but having references to reactive props
-// in the pinia store state. Useful for just accessing
-// data from the state, but not calling any action.
+// Example of destructuring, but having references to reactive props in the pinia store state.
+// This is useful when you're only using state from the store, but not for calling any action.
 // import { storeToRefs } from "pinia"
 // const { products } = storeToRefs(useProductStore())
 

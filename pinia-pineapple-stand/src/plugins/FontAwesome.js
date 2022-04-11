@@ -3,6 +3,7 @@ import { faShoppingCart, faWindowClose, faTrashAlt } from '@fortawesome/free-sol
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faShoppingCart, faWindowClose, faTrashAlt)
+
 export default (app) => {
   app.component('fa', FontAwesomeIcon)
 }
