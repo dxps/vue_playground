@@ -1,7 +1,7 @@
 <template>
-    <span :title="humanFriendlyDate()">
-        {{ diffForHumans() }}
-    </span>
+  <span :title="humanFriendlyDate()">
+    {{ diffForHumans() }}
+  </span>
 </template>
 
 <script>
@@ -13,16 +13,16 @@ dayjs.extend(relativeTime)
 dayjs.extend(localizedDate)
 
 export default {
-    props: {
-        timestamp: { required: true, type: Number }
+  props: {
+    timestamp: { required: true, type: Number }
+  },
+  methods: {
+    diffForHumans() {
+      return dayjs.unix(this.timestamp).fromNow()
     },
-    methods: {
-        diffForHumans() {
-            return dayjs.unix(this.timestamp).fromNow()
-        },
-        humanFriendlyDate() {
-            return dayjs.unix(this.timestamp).format("llll")
-        }
+    humanFriendlyDate() {
+      return dayjs.unix(this.timestamp).format("llll")
     }
+  }
 }
 </script>

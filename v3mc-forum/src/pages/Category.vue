@@ -1,28 +1,25 @@
 <template>
-    <h1>{{ category.name }}</h1>
-    <forum-list :title="category.name" :forums="getForumsForCategory(category)" />
+  <h1>{{ category.name }}</h1>
+  <forum-list :title="category.name" :forums="getForumsForCategory(category)" />
 </template>
 
 <script>
 import ForumList from "@/components/ForumList"
 
 export default {
-    props: {
-        id: { required: true, type: String }
-    },
-    computed: {
-        category() {
-            return this.$store.state.categories.find((category) => category.id === this.id)
-        }
-    },
-    components: { ForumList },
-    methods: {
-        getForumsForCategory(category) {
-            return this.$store.state.forums.filter((forum) => forum.categoryId === category.id)
-        }
+  props: {
+    id: { required: true, type: String }
+  },
+  computed: {
+    category() {
+      return this.$store.state.categories.find((category) => category.id === this.id)
     }
+  },
+  components: { ForumList },
+  methods: {
+    getForumsForCategory(category) {
+      return this.$store.state.forums.filter((forum) => forum.categoryId === category.id)
+    }
+  }
 }
 </script>
-
-<style>
-</style>
