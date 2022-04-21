@@ -475,8 +475,8 @@ span.online {
 span.online::before {
     font-family: FontAwesome;
     content: "\f2be";
-    font-size: 14px;
-    margin-right: 5px;
+    font-size: 16px;
+    margin-right: 10px;
 }
 
 .header {
