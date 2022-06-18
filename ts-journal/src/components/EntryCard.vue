@@ -2,6 +2,9 @@
 import DateDisplay from "./DateDisplay.vue"
 import UseEmojis from "@/composables/UseEmojis"
 import type Entry from "@/types/Entry"
+import { inject } from "vue"
+import { userInjectionKey } from "@/types/injectionKeys"
+import { isUserLoggedIn } from "@/types/User"
 
 // We can define the props using the runtime based declaration by passing an object.
 // That's similar with the vanilla JavaScript approach: defineProps({ myProp: { type: String }})
@@ -14,6 +17,8 @@ defineProps<{
 }>()
 
 const { findEmoji } = UseEmojis()
+
+const currUser = inject(userInjectionKey)
 </script>
 <template>
   <div class="entry-card">
@@ -23,8 +28,10 @@ const { findEmoji } = UseEmojis()
     </div>
     <div class="entry-footer">
       <DateDisplay :date="entry.createdAt" class="mr-2" />
-      |
-      <span class="ml-2">myself</span>
+      <div v-if="isUserLoggedIn(currUser)">
+        |
+        <span class="ml-2">{{ currUser?.username }}</span>
+      </div>
     </div>
   </div>
 </template>

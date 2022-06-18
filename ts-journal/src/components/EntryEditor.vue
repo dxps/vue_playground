@@ -2,8 +2,10 @@
 import EmojiField from "@/components/EmojiField.vue"
 import ArrowCircleRight from "@/assets/icons/arrow-circle-right.svg"
 import type Emoji from "@/types/Emoji"
-import { computed, onMounted, ref } from "vue"
+import { computed, inject, onMounted, ref } from "vue"
 import type Entry from "@/types/Entry"
+import { userInjectionKey } from "@/types/injectionKeys"
+import { isUserLoggedIn } from "@/types/User"
 
 // Data
 
@@ -11,6 +13,8 @@ const body = ref("")
 const emoji = ref<Emoji | null>(null)
 const charCount = computed(() => body.value.length)
 const maxChars = 280
+
+const currUser = inject(userInjectionKey)
 
 // Events
 
@@ -61,7 +65,9 @@ onMounted(() => textarea.value?.focus())
       :value="body"
       @keyup="handleTextInput"
       ref="textarea"
-      placeholder="New Journal Entry"
+      :placeholder="`New Journal Entry ${
+        isUserLoggedIn(currUser) ? 'for ' + currUser?.username : ''
+      }`"
     ></textarea>
     <EmojiField v-model="emoji" />
     <div class="entry-form-footer">

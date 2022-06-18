@@ -3,8 +3,9 @@ import TheHeader from "@/components/TheHeader.vue"
 import EntryEditor from "./components/EntryEditor.vue"
 import EntryCard from "@/components/EntryCard.vue"
 import type User from "./types/User"
-import { reactive } from "vue"
+import { provide, reactive } from "vue"
 import type Entry from "./types/Entry"
+import { userInjectionKey } from "./types/injectionKeys"
 
 const user: User = reactive({
   id: 1,
@@ -13,6 +14,9 @@ const user: User = reactive({
 })
 
 const entries: Entry[] = reactive([])
+
+// Provide the User, so that any child component could inject it.
+provide(userInjectionKey, user)
 
 console.log(`Username is ${user.username}`)
 

@@ -3,3 +3,7 @@ export default interface User {
   username: string
   settings: string[]
 }
+
+export const isUserLoggedIn = (currUser: User | undefined) => {
+  return currUser !== undefined && currUser?.username !== undefined
+}
