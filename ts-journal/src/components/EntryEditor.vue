@@ -2,7 +2,7 @@
 import EmojiField from "@/components/EmojiField.vue"
 import ArrowCircleRight from "@/assets/icons/arrow-circle-right.svg"
 import type Emoji from "@/types/Emoji"
-import { computed, ref } from "vue"
+import { computed, onMounted, ref } from "vue"
 import type Entry from "@/types/Entry"
 
 // Data
@@ -47,12 +47,20 @@ const handleSubmit = () => {
   body.value = ""
   emoji.value = null
 }
+
+// Template Refs
+
+const textarea = ref<HTMLTextAreaElement | null>(null)
+
+// Focus on the textarea once the component is mounted into the DOM.
+onMounted(() => textarea.value?.focus())
 </script>
 <template>
   <form class="entry-form" @submit.prevent="handleSubmit">
     <textarea
       :value="body"
       @keyup="handleTextInput"
+      ref="textarea"
       placeholder="New Journal Entry"
     ></textarea>
     <EmojiField v-model="emoji" />
