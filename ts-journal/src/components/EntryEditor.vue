@@ -14,13 +14,13 @@ const maxChars = 280
 
 // Events
 
-// Instead of using a runtime declaration specified as `defineEmits(["@create"])`,
+// Instead of using a runtime declaration specified as defineEmits(["@create"])
 // we use a type declaration to define our custom events.
 // <> means we're using the type assertion.
 // {} means we're passing a type literal as the type argument.
 // Within the literal, we're passing a call signature.
 // After the event name, the event payload can have any arbitrary name like `entry`.
-defineEmits<{
+const emit = defineEmits<{
   (e: "@create", entry: Entry): void
 }>()
 
@@ -34,20 +34,22 @@ const handleTextInput = (ev: Event) => {
     body.value = textarea.value = textarea.value.substring(0, 280)
   }
 }
+
+const handleSubmit = () => {
+  const entry: Entry = {
+    id: Math.random(),
+    userId: 1,
+    createdAt: new Date(),
+    body: body.value,
+    emoji: emoji.value,
+  }
+  emit("@create", entry)
+  body.value = ""
+  emoji.value = null
+}
 </script>
 <template>
-  <form
-    class="entry-form"
-    @submit.prevent="
-      $emit('@create', {
-        body,
-        emoji,
-        createdAt: new Date(),
-        userId: 1,
-        id: Math.random(),
-      })
-    "
-  >
+  <form class="entry-form" @submit.prevent="handleSubmit">
     <textarea
       :value="body"
       @keyup="handleTextInput"
