@@ -4,6 +4,7 @@ import EntryEditor from "./components/EntryEditor.vue"
 import EntryCard from "@/components/EntryCard.vue"
 import type User from "./types/User"
 import { reactive } from "vue"
+import type Entry from "./types/Entry"
 
 const user: User = reactive({
   id: 1,
@@ -12,12 +13,16 @@ const user: User = reactive({
 })
 
 console.log(`Username is ${user.username}`)
+
+const handleCreateEntry = (entry: Entry) => {
+  console.log(entry)
+}
 </script>
 
 <template>
   <main class="container m-auto p-10">
     <TheHeader />
-    <EntryEditor />
+    <EntryEditor @@create="handleCreateEntry" />
     <ul>
       <li>
         <EntryCard />
