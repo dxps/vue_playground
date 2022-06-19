@@ -2,10 +2,7 @@
   <router-view />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'App'
-});
+<script setup lang="ts">
+// Nothing for now here.
+// Using Composition API, there's no need for any `defineComponent` stmt.
 </script>
