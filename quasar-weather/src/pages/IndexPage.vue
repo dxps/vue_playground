@@ -1,13 +1,28 @@
 <template>
   <q-page class="flx column">
-    <div class="col q-pt-lg q-px-md">
-      <q-input v-model="search" Placehoder="Search" dark borderless>
+    <div class="col q-pt-lg q-px-lg">
+      <q-input
+        v-model="search.input"
+        @keyup.enter="getWeatherBySearch"
+        :no-error-icon="true"
+        :hint="searchHint"
+        placehoder="Search"
+        dark
+        dense
+      >
         <template v-slot:before>
           <q-icon name="my_location" />
         </template>
 
         <template v-slot:append>
-          <q-btn @click="getLocation" round dense flat icon="search" />
+          <q-btn
+            @click="getWeatherBySearch"
+            :disable="searchIsEmpty"
+            round
+            dense
+            flat
+            icon="search"
+          />
         </template>
       </q-input>
     </div>
@@ -44,17 +59,25 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from '@vue/reactivity';
+import axios, { AxiosError } from 'axios';
 import { api } from 'src/boot/axios';
 import { WeatherData } from 'src/components/models';
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 
 // Data
 
-let search = ref('');
+let search = reactive({ input: '', errorText: '' });
+// a computed ref.
+const searchIsEmpty = computed(() => {
+  return search.input.trim().length == 0;
+});
+const searchHint = computed(() => {
+  return searchIsEmpty.value ? '' : search.errorText;
+});
+
 let weatherData = reactive<WeatherData>(new WeatherData());
 
-// let lat = ref(0);
-// let lon = ref(0);
 let apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 let apiKey = 'dd44b008200488605d26eaa927111707';
 
@@ -84,6 +107,31 @@ let getWeatherByCoords = (lat: number, lon: number) => {
       weatherData.fetched = true;
     });
   console.log('Now weatherData:', weatherData);
+};
+
+let getWeatherBySearch = () => {
+  if (searchIsEmpty.value) return;
+  api
+    .get(`${apiUrl}?q=${search.input}&units=metric&APPID=${apiKey}`)
+    .then((resp) => {
+      console.log(`[getWeatherBySearch] API resp: ${resp}`);
+      weatherData.name = resp.data.name;
+      weatherData.state.text = resp.data.weather[0].main;
+      weatherData.state.icon = resp.data.weather[0].icon;
+      weatherData.temp = Math.round(resp.data.main.temp);
+      weatherData.fetched = true;
+    })
+    .catch((e: Error | AxiosError) => {
+      console.log(`[getWeatherBySearch] API Error: ${e}`);
+      weatherData.fetched = false;
+      if (axios.isAxiosError(e)) {
+        // Access to config, request, and response
+        search.errorText = (e as AxiosError).message;
+      } else {
+        // Just a stock error
+        search.errorText = e.message;
+      }
+    });
 };
 </script>
 
