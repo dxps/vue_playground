@@ -114,7 +114,6 @@ let getWeatherBySearch = () => {
   api
     .get(`${apiUrl}?q=${search.input}&units=metric&APPID=${apiKey}`)
     .then((resp) => {
-      console.log(`[getWeatherBySearch] API resp: ${resp}`);
       weatherData.name = resp.data.name;
       weatherData.state.text = resp.data.weather[0].main;
       weatherData.state.icon = resp.data.weather[0].icon;
@@ -122,13 +121,19 @@ let getWeatherBySearch = () => {
       weatherData.fetched = true;
     })
     .catch((e: Error | AxiosError) => {
-      console.log(`[getWeatherBySearch] API Error: ${e}`);
       weatherData.fetched = false;
       if (axios.isAxiosError(e)) {
-        // Access to config, request, and response
-        search.errorText = (e as AxiosError).message;
+        // Access to config, request, and response.
+        if (e.response?.status === 401) {
+          search.errorText = 'Search API key is forbidden';
+        }
+        if (e.response?.status === 404) {
+          search.errorText = 'Unknow location';
+        } else {
+          search.errorText = (e as AxiosError).message;
+        }
       } else {
-        // Just a stock error
+        // Just a stock error.
         search.errorText = e.message;
       }
     });
