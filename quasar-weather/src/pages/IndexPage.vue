@@ -151,5 +151,5 @@ let getWeatherBySearch = () => {
   flex: 0 0 100px
   background: url(/skyline.png)
   background-size: contain
-  background-position:center bottom
+  background-position: center bottom
 </style>
