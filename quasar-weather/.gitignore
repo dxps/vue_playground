@@ -1,3 +1,9 @@
+
+## Environment variables file
+## It contains VUE_APP_OPENWEATHER_API
+## (ex: VUE_APP_OPENWEATHER_API=dd44...1707)
+.env
+
 .DS_Store
 .thumbs.db
 node_modules

@@ -79,7 +79,7 @@ const searchHint = computed(() => {
 let weatherData = reactive<WeatherData>(new WeatherData());
 
 let apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
-let apiKey = 'dd44b008200488605d26eaa927111707';
+let apiKey = process.env.VUE_APP_OPENWEATHER_API;
 
 // Methods
 
