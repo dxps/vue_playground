@@ -7,30 +7,33 @@
         </template>
 
         <template v-slot:append>
-          <q-btn round dense flat icon="search" />
+          <q-btn @click="getLocation" round dense flat icon="search" />
         </template>
       </q-input>
     </div>
 
-    <template v-if="weatherData">
+    <template v-if="weatherData.fetched">
       <div class="col text-white text-center">
-        <div class="text-h4 text-weight-ligh">Bucharest</div>
-        <div class="text-h6">Sunny</div>
+        <div class="text-h4 text-weight-ligh">{{ weatherData.name }}</div>
+        <div class="text-h6">{{ weatherData.state.text }}</div>
         <div class="text-h1 text-weight-thin q-my-lg relative-position">
-          <span>32</span>
-          <span class="text-h4 relative-position degree">&deg;</span>
+          <span>{{ weatherData.temp }}</span>
+          <span class="text-h4 relative-position degree">&deg;C</span>
         </div>
       </div>
 
       <div class="col text-center">
-        <img src="https://www.fillmurray.com/100/100" />
+        <img
+          :src="`http://openweathermap.org/img/wn/${weatherData.state.icon}@2x.png`"
+        />
       </div>
     </template>
+
     <template v-else>
       <div class="col column text-center text-white">
         <div class="col text-h2 text-weight-thin">Quasar<br />Weather</div>
-        <q-btn class="col" flat>
-          <q-icon left size="3em" name="my_location" />
+        <q-btn @click="getLocation" class="col" flat>
+          <q-icon left name="my_location" />
           <div>Find my location</div>
         </q-btn>
       </div>
@@ -41,11 +44,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { api } from 'src/boot/axios';
+import { WeatherData } from 'src/components/models';
+import { reactive, ref } from 'vue';
+
+// Data
 
 let search = ref('');
+let weatherData = reactive<WeatherData>(new WeatherData());
 
-let weatherData = ref(null);
+// let lat = ref(0);
+// let lon = ref(0);
+let apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+let apiKey = 'dd44b008200488605d26eaa927111707';
+
+// Methods
+
+let getLocation = () => {
+  // ...
+  console.log('getLocation');
+  navigator.geolocation.getCurrentPosition((pos) => {
+    console.log('position: ', pos);
+    weatherData.lat = pos.coords.latitude;
+    weatherData.lon = pos.coords.longitude;
+    getWeatherByCoords(weatherData.lat, weatherData.lon);
+  });
+};
+
+let getWeatherByCoords = (lat: number, lon: number) => {
+  console.log('OpenWeather API using lat:', lat, ' lon:', lon);
+  api
+    .get(`${apiUrl}?lat=${lat}&lon=${lon}&units=metric&APPID=${apiKey}`)
+    .then((resp) => {
+      console.log('OpenWeather API resp: ', resp);
+      weatherData.name = resp.data.name;
+      weatherData.state.text = resp.data.weather[0].main;
+      weatherData.state.icon = resp.data.weather[0].icon;
+      weatherData.temp = Math.round(resp.data.main.temp);
+      weatherData.fetched = true;
+    });
+  console.log('Now weatherData:', weatherData);
+};
 </script>
 
 <style lang="sass">
