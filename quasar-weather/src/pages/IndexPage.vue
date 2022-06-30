@@ -64,6 +64,7 @@ import axios, { AxiosError } from 'axios';
 import { api } from 'src/boot/axios';
 import { WeatherData } from 'src/components/models';
 import { reactive } from 'vue';
+import { useQuasar } from 'quasar';
 
 // Data
 
@@ -85,22 +86,24 @@ let weatherData = reactive<WeatherData>(new WeatherData());
 
 let apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 let apiKey = process.env.VUE_APP_OPENWEATHER_API;
+const $q = useQuasar();
 
 // Methods
 
 let getLocation = () => {
-  // ...
-  console.log('getLocation');
+  //
+  $q.loading.show();
   navigator.geolocation.getCurrentPosition((pos) => {
     console.log('position: ', pos);
     weatherData.lat = pos.coords.latitude;
     weatherData.lon = pos.coords.longitude;
     getWeatherByCoords(weatherData.lat, weatherData.lon);
   });
+  $q.loading.hide();
 };
 
 let getWeatherByCoords = (lat: number, lon: number) => {
-  console.log('OpenWeather API using lat:', lat, ' lon:', lon);
+  //
   api
     .get(`${apiUrl}?lat=${lat}&lon=${lon}&units=metric&APPID=${apiKey}`)
     .then((resp) => {
@@ -115,6 +118,8 @@ let getWeatherByCoords = (lat: number, lon: number) => {
 };
 
 let getWeatherBySearch = () => {
+  //
+  $q.loading.show();
   if (searchIsEmpty.value) return;
   api
     .get(`${apiUrl}?q=${search.input}&units=metric&APPID=${apiKey}`)
@@ -142,6 +147,7 @@ let getWeatherBySearch = () => {
         search.errorText = e.message;
       }
     });
+  $q.loading.hide();
 };
 </script>
 
