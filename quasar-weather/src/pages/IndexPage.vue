@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flx column">
+  <q-page class="flex column" :class="bgClass">
     <div class="col q-pt-lg q-px-lg">
       <q-input
         v-model="search.input"
@@ -75,6 +75,11 @@ const searchIsEmpty = computed(() => {
 const searchHint = computed(() => {
   return searchIsEmpty.value ? '' : search.errorText;
 });
+const bgClass = computed(() => {
+  if (weatherData.fetched) {
+    return weatherData.state.icon.endsWith('d') ? 'bg-day' : 'bg-night';
+  }
+});
 
 let weatherData = reactive<WeatherData>(new WeatherData());
 
@@ -143,6 +148,11 @@ let getWeatherBySearch = () => {
 <style lang="sass">
 .q-page
   background: linear-gradient(to bottom, #136a8a, #267871)
+
+  &.bg-day
+    background: linear-gradient(to bottom, #00b4db, #0083b0)
+  &.bg-night
+    background: linear-gradient(to bottom, #232526, #414345)
 
 .degree
   top: -44px
