@@ -11,7 +11,9 @@
         dense
       >
         <template v-slot:before>
-          <q-icon name="my_location" />
+          <q-icon name="my_location" @click="getLocation">
+            <q-tooltip class="text-body2">Find my location</q-tooltip>
+          </q-icon>
         </template>
 
         <template v-slot:append>
@@ -99,7 +101,6 @@ let getLocation = () => {
     weatherData.lon = pos.coords.longitude;
     getWeatherByCoords(weatherData.lat, weatherData.lon);
   });
-  $q.loading.hide();
 };
 
 let getWeatherByCoords = (lat: number, lon: number) => {
@@ -113,6 +114,7 @@ let getWeatherByCoords = (lat: number, lon: number) => {
       weatherData.state.icon = resp.data.weather[0].icon;
       weatherData.temp = Math.round(resp.data.main.temp);
       weatherData.fetched = true;
+      $q.loading.hide();
     });
   console.log('Now weatherData:', weatherData);
 };
@@ -129,6 +131,7 @@ let getWeatherBySearch = () => {
       weatherData.state.icon = resp.data.weather[0].icon;
       weatherData.temp = Math.round(resp.data.main.temp);
       weatherData.fetched = true;
+      $q.loading.hide();
     })
     .catch((e: Error | AxiosError) => {
       weatherData.fetched = false;
@@ -146,8 +149,8 @@ let getWeatherBySearch = () => {
         // Just a stock error.
         search.errorText = e.message;
       }
+      $q.loading.hide();
     });
-  $q.loading.hide();
 };
 </script>
 
