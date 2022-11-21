@@ -16,7 +16,7 @@ export const useProductStore = defineStore("ProductStore", {
     async fill() {
       // Simulating a real world case when data is fetched from an external API.
       // In this case, we use a dynamic import to fetch it from the JSON file.
-      // We can see this request in the DevTools Network tab.
+      // We can even see this as a request in the DevTools, Network tab.
       this.products = (await import("@/data/products.json")).default
     }
   }
