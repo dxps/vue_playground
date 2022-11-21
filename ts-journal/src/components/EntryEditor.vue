@@ -7,7 +7,9 @@ import type Entry from "@/types/Entry"
 import { userInjectionKey } from "@/types/injectionKeys"
 import { isUserLoggedIn } from "@/types/User"
 
-// Data
+// ------
+//  Data
+// ------
 
 const body = ref("")
 const emoji = ref<Emoji | null>(null)
@@ -28,14 +30,16 @@ const emit = defineEmits<{
   (e: "@create", entry: Entry): void
 }>()
 
-// Methods
+// ---------
+//  Methods
+// ---------
 
 const handleTextInput = (ev: Event) => {
   const textarea = ev.target as HTMLTextAreaElement
   if (textarea.value.length <= maxChars) {
     body.value = textarea.value
   } else {
-    body.value = textarea.value = textarea.value.substring(0, 280)
+    body.value = textarea.value = textarea.value.substring(0, maxChars)
   }
 }
 
@@ -52,13 +56,16 @@ const handleSubmit = () => {
   emoji.value = null
 }
 
-// Template Refs
+// ---------------
+//  Template Refs
+// ---------------
 
 const textarea = ref<HTMLTextAreaElement | null>(null)
 
-// Focus on the textarea once the component is mounted into the DOM.
+// Set focus on the textarea, once the component is mounted into the DOM.
 onMounted(() => textarea.value?.focus())
 </script>
+
 <template>
   <form class="entry-form" @submit.prevent="handleSubmit">
     <textarea

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import TheHeader from "@/components/TheHeader.vue"
-import EntryEditor from "./components/EntryEditor.vue"
 import EntryCard from "@/components/EntryCard.vue"
-import type User from "./types/User"
+import EntryEditor from "@/components/EntryEditor.vue"
+import TheHeader from "@/components/TheHeader.vue"
+import { userInjectionKey } from "@/types/injectionKeys"
 import { provide, reactive } from "vue"
-import type Entry from "./types/Entry"
-import { userInjectionKey } from "./types/injectionKeys"
+import type Entry from "@/types/Entry"
+import type User from "@/types/User"
 
 const user: User = reactive({
   id: 1,
