@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { v4 as uuidv4 } from 'uuid'
 import { restaurantStatusList } from '@/constants'
 import type { Restaurant } from '@/types'
+import { v4 as uuidv4 } from 'uuid'
 import { onMounted, ref } from 'vue'
 
 const newRestaurant = ref<Restaurant>({

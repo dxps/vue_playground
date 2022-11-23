@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
 import type { Dish } from '@/types'
+import { v4 as uuidv4 } from 'uuid'
+import { onMounted, ref } from 'vue'
 
 const newDish = ref<Dish>({
   id: uuidv4(),
