@@ -18,7 +18,7 @@ export default defineComponent({
           return 'is-warning'
         case 'Recommended':
           return 'is-success'
-        case 'Do Not Recommend':
+        case 'Not Recommended':
           return 'is-danger'
         default:
           return ''

@@ -30,7 +30,7 @@ const restaurantList = ref<Restaurant[]>([
     name: 'Penne For Your Thoughts',
     address: '870 Thisisa St.',
     website: 'www.penneforyourthoughts.com',
-    status: 'Do Not Recommend',
+    status: 'Not Recommended',
   },
 ])
 const addRestaurant = (payload: Restaurant) => {
