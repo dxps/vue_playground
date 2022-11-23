@@ -12,6 +12,12 @@ const newRestaurant = ref<Restaurant>({
   status: 'Want to Try',
 })
 
+const updateName = (event: Event) => {
+  if ((event as InputEvent).data === ' ') {
+    newRestaurant.value.name = (event.target as HTMLInputElement).value
+  }
+}
+
 const emit = defineEmits<{
   (e: 'add-new-restaurant', restaurant: Restaurant): void
   (e: 'cancel-new-restaurant'): void
@@ -40,7 +46,7 @@ onMounted(() => {
         <div class="control">
           <input
             :value="newRestaurant.name"
-            @keyup.space="updateName"
+            @input="updateName"
             type="text"
             class="input is-large"
             placeholder="Beignet and the Jets"

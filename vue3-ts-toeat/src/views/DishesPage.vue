@@ -24,7 +24,7 @@ const dishList = ref<Dish[]>([
   {
     id: 'c113411d-1589-414f-a283-daf7eedb631e',
     name: 'Full Laptop Battery',
-    status: 'Do Not Recommend',
+    status: 'Not Recommended',
   },
 ])
 const numberOfDishes = computed((): number => {
@@ -64,6 +64,10 @@ onMounted(() => {
     showNewForm.value = true
   }
 })
+
+const updateFilterText = (event: KeyboardEvent) => {
+  filterText.value = (event.target as HTMLInputElement).value
+}
 </script>
 
 <template>
@@ -92,7 +96,13 @@ onMounted(() => {
             <div class="level-item is-hidden-tablet-only">
               <div class="field has-addons">
                 <p class="control">
-                  <input class="input" type="text" placeholder="Dish name" v-model="filterText" />
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Dish name"
+                    :value="filterText"
+                    @keyup.enter="updateFilterText"
+                  />
                 </p>
                 <p class="control">
                   <button class="button">Search</button>
