@@ -1,28 +1,26 @@
-<script>
-export default {
-  props: {
-    tagline: {
-      type: String,
-      default: 'Track everything you want to eat!',
-    },
-  },
-  data: () => ({
-    navList: [
-      {
-        name: 'Home',
-        path: '/',
-      },
-      {
-        name: 'Restaurants',
-        path: '/restaurants',
-      },
-      {
-        name: 'Dishes',
-        path: '/dishes',
-      },
-    ],
-  }),
+<script setup lang="ts">
+import { ref } from 'vue'
+
+type PropTypes = {
+  tagline: string
 }
+
+defineProps<PropTypes>()
+
+const navList = ref([
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'Restaurants',
+    path: '/restaurants',
+  },
+  {
+    name: 'Dishes',
+    path: '/dishes',
+  },
+])
 </script>
 
 <template>
