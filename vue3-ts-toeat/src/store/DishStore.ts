@@ -31,9 +31,25 @@ export const useDishStore = defineStore('DishStore', {
       this.list.push(payload)
     },
 
+    updateDish(payload: Dish) {
+      this.list.filter((dish) => {
+        if (dish.id === payload.id) {
+          dish.name = payload.name
+        }
+      })
+    },
+
     deleteDish(payload: Dish) {
       this.list = this.list.filter((dish) => dish.id !== payload.id)
       console.log('[DishStore] Deleted', payload)
+    },
+  },
+
+  getters: {
+    getDishById: (state) => {
+      return (dishId: string): Dish => {
+        return state.list.filter((dish: Dish) => dish.id === dishId)[0]
+      }
     },
   },
 })

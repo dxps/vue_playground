@@ -22,7 +22,12 @@ const statusColor = computed(() => {
 
 const emit = defineEmits<{
   (e: 'delete-dish', dish: Dish): void
+  (e: 'edit-dish', dish: Dish): void
 }>()
+
+const editDish = () => {
+  emit('edit-dish', props.dish)
+}
 
 const deleteDish = () => {
   emit('delete-dish', props.dish)
@@ -43,8 +48,7 @@ const deleteDish = () => {
           <span class="tag" :class="statusColor">{{ dish.status }}</span>
         </p>
         <div>
-          <!-- TODO -->
-          <!-- <button @click="editDish" class="button is-small is-warning is-light">Edit</button> -->
+          <button @click="editDish" class="button is-small is-warning is-light">Edit</button>
           <button @click="deleteDish" class="button is-small is-danger is-light">Delete</button>
         </div>
       </div>

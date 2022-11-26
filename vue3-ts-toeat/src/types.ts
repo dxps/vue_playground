@@ -9,11 +9,15 @@ export type Restaurant = {
   diet?: Diet
 }
 
-export type Dish = {
-  id: string
-  name: string
-  status: Status
+export class Dish {
+  id: string = ''
+  name: string = ''
+  status: Status = 'Want to Try'
   diet?: Diet
+
+  //   constructor() {
+  //     return { id: '', name: '' }
+  //   }
 }
 
 // Instead of declaring:
