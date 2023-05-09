@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@capacitor/android": "^2.4.7",
-    "@capacitor/cli": "^2.4.7",
+    "@capacitor/cli": "^5.0.1",
     "@capacitor/core": "^2.4.7",
     "animate.css": "^4.1.1",
     "axios": "^0.21.2",
