@@ -15,7 +15,7 @@
     "vue": "^3.2.31"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.1.4",
+    "@vitejs/plugin-vue": "^5.2.3",
     "autoprefixer": "^10.4.4",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
@@ -23,6 +23,6 @@
     "postcss": "^8.4.31",
     "prettier": "2.6.2",
     "tailwindcss": "^2.2.19",
-    "vite": "^5.4.14"
+    "vite": "^6.2.3"
   }
 }
